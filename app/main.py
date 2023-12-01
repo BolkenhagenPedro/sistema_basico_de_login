@@ -1,4 +1,4 @@
-
+from sys import quit
 def ler_senha(msg='Digite a senha: '):
     from getpass import getpass
     senha = getpass(msg)
@@ -64,4 +64,7 @@ print("""Escolha alguma das opções a baixo:
 opc = leiaopc('Sua opção: ')
 if opc == 2:
     usuario = ler_usuario()
-    
+    senha = ler_senha()
+    cadastrar_novo_usuario(usuario, senha)
+    print('Usuário cadastrado com sucesso.')
+    quit()
