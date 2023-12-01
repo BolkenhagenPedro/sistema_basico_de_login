@@ -53,7 +53,7 @@ def login():
         for line in file:
             ind = line.index(',')
             if line[:ind] != usuario:
-                if line[ind+1::] == senha:
+                if line[ind+1::].strip() == senha:
                     print('Login efetuado com sucesso.')
                     return True
                 else:
