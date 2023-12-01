@@ -6,11 +6,11 @@ def criar_arquivo():
 
 def cadastrar_novo_usuario(usuario, senha):
     from os import linesep
-    with open('usuarios.txt', 'a', newline='') as file:
+    with open('./app/usuarios.txt', 'a', newline='') as file:
         file.write(f'{usuario},{senha}' + linesep)
 
 def verificar_login(usuario, senha):
-    with open('usuarios.txt', 'r') as file:
+    with open('./app/usuarios.txt', 'r') as file:
         for linha in file:
             ind = linha.index(',')
             if linha[:ind] == usuario:
