@@ -1,6 +1,7 @@
-from sys import quit
+from sys import exit
+from getpass import getpass
+
 def ler_senha(msg='Digite a senha: '):
-    from getpass import getpass
     senha = getpass(msg)
     while len(senha) < 8:
         print('Digite um senha com 8 ou mais caracteres.')
@@ -9,8 +10,8 @@ def ler_senha(msg='Digite a senha: '):
 
 
 def ler_usuario(msg='Digite um nome de um novo usuário: '):
-    usuario = input(msg)
-    with open('./appusuarios.txt', 'r') as file:
+    usuario = input(msg).strip()
+    with open('./app/usuarios.txt', 'r') as file:
         for line in file:
             ind = line.index(',')
             while line[:ind] == usuario:
@@ -22,7 +23,7 @@ def leiaopc(msg=''):
     while True:
         try:
             n = int(input(msg))
-            if 1 >= n >= 2:
+            if n == 1 or n == 2:
                 return n
             else:
                 while n not in [1,2]:
@@ -42,26 +43,24 @@ def cadastrar_novo_usuario():
     with open('./app/usuarios.txt', 'a', newline='') as file:
         file.write(f'{usuario},{senha}' + linesep)
     print('Usuário cadastrado com sucesso.')
-    quit()
+    exit()
 
 def login():
-    pass
+    usuario = input('Digite o nome de usuário: ').strip()
+    senha = getpass('Senha: ')
 
-def verificar_login(usuario, senha):
     with open('./app/usuarios.txt', 'r') as file:
-        for linha in file:
-            ind = linha.index(',')
-            if linha[:ind] == usuario:
-                if linha[ind+1:] == senha:
-                    print('Login efetuado com sucesso!')
+        for line in file:
+            ind = line.index(',')
+            if line[:ind] != usuario:
+                if line[ind+1::] == senha:
+                    print('Login efetuado com sucesso.')
                     return True
                 else:
-                    print('Senha inválida!')
+                    print('Senha incorreta!')
                     return False
-        print(f'"{usuario}" não é cadastrado como um nome de usuário.')
+        print(f'Não foi encontrado um usuário {usuario}.')
         return False
-
-
 
 criar_arquivo()
 
