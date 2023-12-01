@@ -1,5 +1,18 @@
 from getpass import getpass
 
+def leiaopc(msg=''):
+    while True:
+        try:
+            n = int(input(msg))
+            if 1 >= n >= 2:
+                return n
+            else:
+                while n not in [1,2]:
+                    print('Digite uma opção válida.')
+                    n = int(input(msg))
+        except:
+            print('Digite uma opção válida.')
+
 def criar_arquivo():
     with open('./app/usuarios.txt', 'a'):
         pass
@@ -26,3 +39,8 @@ def verificar_login(usuario, senha):
 
 
 criar_arquivo()
+
+print("""Escolha alguma das opções a baixo:
+    [1] - Login
+    [2] - Cadastrar um novo usuário""")
+opc = leiaopc('Sua opção: ')
