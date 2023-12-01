@@ -35,10 +35,17 @@ def criar_arquivo():
     with open('./app/usuarios.txt', 'a'):
         pass
 
-def cadastrar_novo_usuario(usuario, senha):
+def cadastrar_novo_usuario():
     from os import linesep
+    usuario = ler_usuario()
+    senha = ler_senha()
     with open('./app/usuarios.txt', 'a', newline='') as file:
         file.write(f'{usuario},{senha}' + linesep)
+    print('Usuário cadastrado com sucesso.')
+    quit()
+
+def login():
+    pass
 
 def verificar_login(usuario, senha):
     with open('./app/usuarios.txt', 'r') as file:
@@ -63,8 +70,5 @@ print("""Escolha alguma das opções a baixo:
     [2] - Cadastrar um novo usuário""")
 opc = leiaopc('Sua opção: ')
 if opc == 2:
-    usuario = ler_usuario()
-    senha = ler_senha()
-    cadastrar_novo_usuario(usuario, senha)
-    print('Usuário cadastrado com sucesso.')
-    quit()
+    cadastrar_novo_usuario()
+login()
