@@ -6,18 +6,18 @@ def criar_arquivo():
         pass
 
 def cadastrar(usuario, senha):
-    with open('usuarios.txt', 'a', newline='') as file:
+    with open('./app/usuarios.txt', 'a', newline='') as file:
         file.write(f'{usuario},{senha}' + linesep)
 
 def verificar_usuario(usuario):
-    with open('usuarios.txt', 'r') as file:
+    with open('./app/usuarios.txt', 'r') as file:
         for line in file:
             ind = line.index(',')
             if usuario == line[:ind]: return False
             return True
         
 def verificar_senha(usuario, senha):
-    with open('usuarios.txt', 'r') as file:
+    with open('./app/usuarios.txt', 'r') as file:
         for line in file:
             ind = line.index(',')
             if usuario == line[:ind]:
