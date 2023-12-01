@@ -1,13 +1,21 @@
-from getpass import getpass
 
-def ler_usuario():
-    usuario = input('Digite um nome de um novo usuário: ')
+def ler_senha(msg='Digite a senha: '):
+    from getpass import getpass
+    senha = getpass(msg)
+    while len(senha) < 8:
+        print('Digite um senha com 8 ou mais caracteres.')
+        senha = getpass(msg)
+    return senha
+
+
+def ler_usuario(msg='Digite um nome de um novo usuário: '):
+    usuario = input(msg)
     with open('./appusuarios.txt', 'r') as file:
         for line in file:
             ind = line.index(',')
             while line[:ind] == usuario:
                 print('Digite um nome de usuário que não está em uso.')
-                usuario = input('Digite um nome de um novo usuário: ')
+                usuario = input(msg)
         return usuario
 
 def leiaopc(msg=''):
@@ -55,4 +63,5 @@ print("""Escolha alguma das opções a baixo:
     [2] - Cadastrar um novo usuário""")
 opc = leiaopc('Sua opção: ')
 if opc == 2:
-    pass
+    usuario = ler_usuario()
+    
