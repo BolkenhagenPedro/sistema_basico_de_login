@@ -8,12 +8,14 @@ def ler_senha(msg='Digite a senha: '):
     return senha
 
 
-def ler_usuario(msg='Digite um nome de um novo usuário: '):
+def ler_usuario(msg='Digite um nome de um novo usuário: ', login=False):
     usuario = input(msg)
     with open('./appusuarios.txt', 'r') as file:
         for line in file:
             ind = line.index(',')
             while line[:ind] == usuario:
+                if login:
+                    return True
                 print('Digite um nome de usuário que não está em uso.')
                 usuario = input(msg)
         return usuario
@@ -45,7 +47,8 @@ def cadastrar_novo_usuario():
     quit()
 
 def login():
-    pass
+   if (usuario := lerusuario('Informe o nome de usuário: ')):
+        pass
 
 def verificar_login(usuario, senha):
     with open('./app/usuarios.txt', 'r') as file:
